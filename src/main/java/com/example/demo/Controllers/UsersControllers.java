@@ -81,19 +81,38 @@ public class UsersControllers {
 
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.ACCEPTED);
 	}
+	
 	@GetMapping
-	public List<UserResponse> getAllUsers(@RequestParam(value="page", defaultValue = "1") int page,@RequestParam(value="limit", defaultValue = "4")  int limit ,@RequestParam(value="search", defaultValue = "") String search,@RequestParam(value="status", defaultValue = "1") int status) {
-		
+	public List<UserResponse> getAllUsers(@RequestParam(value="page") int page, @RequestParam(value="limit")int limit){
 		List<UserResponse> usersResponse = new ArrayList<>();
-		
-		List<UserDto> users = userService.getUsers(page, limit);
-		
+		///recupere from BD
+		List<UserDto> users = userService.getUsers(page,limit);
+		///perse from usersDto 
 		for(UserDto userDto: users) {
 			UserResponse user = new UserResponse();
-			BeanUtils.copyProperties(userDto, users);			
+			BeanUtils.copyProperties(userDto, user);
+			
 			usersResponse.add(user);
+			
 		}
+		
+		
 		
 		return usersResponse;
 	}
+//	@GetMapping
+//	public List<UserResponse> getAllUsers(@RequestParam(value="page", defaultValue = "1") int page,@RequestParam(value="limit", defaultValue = "4")  int limit ,@RequestParam(value="search", defaultValue = "") String search,@RequestParam(value="status", defaultValue = "1") int status) {
+//		
+//		List<UserResponse> usersResponse = new ArrayList<>();
+//		
+//		List<UserDto> users = userService.getUsers(page, limit);
+//		
+//		for(UserDto userDto: users) {
+//			UserResponse user = new UserResponse();
+//			BeanUtils.copyProperties(userDto, users);			
+//			usersResponse.add(user);
+//		}
+//		
+//		return usersResponse;
+//	}
 }

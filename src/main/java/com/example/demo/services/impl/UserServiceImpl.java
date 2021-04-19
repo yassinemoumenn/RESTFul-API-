@@ -124,8 +124,7 @@ public class UserServiceImpl implements UserService {
 		   List<UserDto> usersResponse = new ArrayList<>();
 
 		    Pageable pageableRequest = PageRequest.of(page, limit);
-		    /*recupere tout in DB without pagination so we will add to user repository
-		    *  another hirit place CrudRepository add PagingAndSortingRepository */ 
+		   
 		    Page<UserEntity> userPage =  userRepository.findAll(pageableRequest);
 		    List<UserEntity> users = userPage.getContent();
 

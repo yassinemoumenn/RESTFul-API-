@@ -32,6 +32,7 @@ public class UserEntity implements Serializable {
 	private Boolean emailVerificationStatus = false;
 	
 	
+	
 //	getters and setters
 	public long getId() {
 		return id;
